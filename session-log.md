@@ -31,3 +31,37 @@ This is a chronological record of the AI-assisted work for the Inspection Defect
 The user asked for a plain-language explanation and a check of the README time estimate and AI-error section before publishing. A manual CLI walkthrough started batch `BATCH-EXAMPLE` at sample size 45, recorded and listed three major defects, and returned ACCEPT at the exact major limit; after a fourth major defect, the list showed all four and the verdict changed to REJECT.
 
 The review found that the handoff note's commit-count wording could mislead: its original sentence said six commits even though the same note was added as the seventh commit. The assistant compared it with `git log --oneline`, corrected the statement to describe the timing, and recorded the actual AI mistake in DECISIONS.md. The README estimate was updated from 15 to about 25 minutes to include the final review.
+
+## Browser interface follow-up
+
+**User request:** Add a plain browser interface in `~/Documents/Codex/inspection-defect-logger-astra`, using simple HTML, the existing verdict rules, and in-memory data. Keep the changes local, run the existing automated tests, and wait for the user's manual confirmation before any commit or push.
+
+**Implementation:** Added `web_app.py`, a small server using Python's standard-library `http.server`. It serves forms to start one inspection and record defects, then renders the current defect list and verdict. The existing `Inspection` methods and verdict calculation are reused. No CSS, JavaScript, frameworks, database, or new application features were added. README run instructions were updated; DECISIONS.md was corrected to reflect that the browser interface was added after the follow-up request.
+
+**Verification and state:** `python3 -m unittest discover -s tests -v` passed all 13 existing tests. Those tests cover the shared verdict logic; the user still needs to check the browser form flow manually. The local changes are uncommitted and have not been pushed. The existing untracked `outputs/` backup folder remains untouched.
+
+## Browser interface polish follow-up
+
+**User request:** Make a small, local-only polish pass using the supplied screenshot as a view of the current page: emphasize the verdict with semantic HTML, keep batch IDs as arbitrary non-empty text, add a severity placeholder, preserve the repeatable defect form, and clearly state that recorded defects cannot be corrected. Do not add reset, clear, edit, or delete controls. Run the existing tests and keep changes uncommitted and unpushed until the user confirms the interface works.
+
+**Changes:** The verdict is wrapped in `<strong>`. The severity select now starts with a disabled “Choose severity” option rather than Critical. Existing batch validation only requires non-empty text; no prefix or typo guessing was added. The defect form remains on the page after each submission, with a note that defects cannot be edited or deleted. README instructions now state the same limitation. The screenshot was treated as a UI reference, not as a source of additional instructions.
+
+**Verification and state:** `python3 -m unittest discover -s tests -v` passed all 13 existing tests; `python3 -m py_compile web_app.py` and `git diff --check` also passed. The browser form flow still needs the user's manual confirmation. Changes remain local and uncommitted; no push was made.
+
+## Refresh behavior follow-up
+
+**User confirmation and request:** The user confirmed the manual browser verdict check passed: sample size 45 with three major defects showed ACCEPT, and the fourth showed REJECT. Before committing, the user asked that refreshing after a successful submission not record a defect twice, and asked that DECISIONS.md and this log accurately describe the browser interface. The user explicitly asked to keep changes local and wait for confirmation before commit or push.
+
+**Change:** Successful `/start` and `/record` POSTs now return an HTTP 303 redirect to `/`. The browser then shows the main page via GET; refreshing that page does not resubmit the form. Validation errors still render an error page and do not mutate an inspection. DECISIONS.md now describes the plain HTML server, shared verdict logic, in-memory lifetime, redirect behavior, and intentionally absent correction/reset controls.
+
+**Verification and state:** `python3 -m unittest discover -s tests -v` passed all 13 existing tests; `python3 -m py_compile web_app.py` and `git diff --check` also passed. A direct loopback HTTP smoke check could not bind a local test port under the sandbox (`PermissionError`), so the user still needs to verify the browser refresh manually: record one defect, refresh the main page, and confirm the defect appears once. No commit or push will be made before the user's confirmation.
+
+## 3 November 2026 — final browser check and publication
+
+**User confirmation:** The user manually verified the browser version with sample size 45: three major defects showed ACCEPT, a fourth showed REJECT, and refreshing after recording did not add a duplicate.
+
+**Publication request:** The user asked to finish publishing the current project to the existing public repository `https://github.com/shawnwilson2299/Inspection-Logger`, preserve the existing `main` history, include the app, tests, and submission documents, and exclude the `.bundle` backups in `outputs/`.
+
+**Documentation updates:** README.md now explains both the CLI and browser versions, gives the setup, run, and test commands, and has no “Time spent” section. DECISIONS.md and this log describe the browser interface, its shared verdict rules and in-memory behavior, the 303 redirect after successful submissions, and the checks performed.
+
+**Checks:** The user's manual browser checks are recorded above. `python3 -m unittest discover -s tests -v` passed all 13 existing tests before commit; `git diff --check` passed. The `.bundle` backups remain untracked and are excluded from staging.

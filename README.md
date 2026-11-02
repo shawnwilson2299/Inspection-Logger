@@ -1,42 +1,43 @@
 # Inspection Defect Logger
 
-A small command-line notebook and calculator for inspection results. The inspector checks real items, then enters one batch ID, sample size, and any critical, major, or minor defects found; the program lists the recorded defects and recalculates an ACCEPT or REJECT verdict. Entries are held in memory for one run and disappear when the program exits. No items or external dataset are included.
+Inspection Defect Logger is a small Python notebook and calculator for factory inspection results. After checking the real items, enter a batch ID, sample size, and any critical, major, or minor defects. The command-line and browser versions both list defects and calculate the verdict using the same acceptance limits. Data is held in memory for one inspection and is cleared when the program exits. No dataset or real inspection items are included.
 
-## Requirements
+## Requirements and setup
 
-Python 3.9 or newer. The app and tests use only the Python standard library; there are no packages to download.
+Python 3.9 or newer. The project uses only the Python standard library; there are no packages to install.
 
-## Install / set up
-
-From the repository directory:
+From the repository directory, create and activate a virtual environment:
 
 ```sh
 python3 -m venv .venv
-```
-
-Activate the environment:
-
-```sh
 source .venv/bin/activate
 ```
 
-## Run
+## Command-line version
 
 ```sh
 python inspection_logger.py
 ```
 
-Enter a batch ID and a whole-number sample size of at least 1. At the prompt, use `record`, `list`, `verdict`, or `quit`. Each defect needs a severity (`critical`, `major`, or `minor`) and a short description. If a sample size is invalid, the program explains the problem and asks again before starting the inspection.
+Enter a batch ID and a whole-number sample size of at least 1. At the prompt, use `record`, `list`, `verdict`, or `quit`. Each defect needs a severity (`critical`, `major`, or `minor`) and a short description. Invalid sample sizes are explained and rejected before an inspection starts.
+
+## Browser version
+
+```sh
+python web_app.py
+```
+
+Open [http://127.0.0.1:8000](http://127.0.0.1:8000). The plain HTML page lets you start an inspection, record multiple defects, see the list, and see the current verdict. Successful submissions return to the main page, so refreshing does not submit the same entry again. Recorded defects cannot be edited or deleted. Stop the server with `Ctrl+C`; the in-memory inspection is then cleared.
 
 ## Run the tests
+
+From the repository directory, with the virtual environment active:
 
 ```sh
 python -m unittest discover -s tests -v
 ```
 
-## Time spent
-
-About 25 minutes so far, including implementation, the automated tests, submission notes, and final review.
+The tests cover the verdict rules and sample-size boundaries. The browser flow was also checked manually, including the verdict change from ACCEPT to REJECT and refresh behavior.
 
 ## AI session
 
