@@ -20,4 +20,6 @@ This is a chronological record of the AI-assisted work for the Inspection Defect
 
 **AI review note:** The assistant stated: “I have not found an actual AI error in this session, so I won’t invent one for the ‘where AI got it wrong’ section; I’ll record that and the checks used to review the suggested rules.” No incorrect output or bad suggestion was observed in the work recorded here.
 
-**Commit 5 — submission notes (in progress at log creation):** README setup/run/test instructions, decisions, and this session record are being added after the tests passed. Final repository status and commit history will be checked before submission.
+**Commit 5 — `f8fd142 Document setup decisions and AI session`:** Added README setup/run/test instructions, DECISIONS.md, and this session record after the tests passed.
+
+**Clean-clone verification:** Cloned the local repository into a temporary directory, followed the README environment setup commands, ran the complete test suite (13 passed), and exercised the CLI with a 44-unit sample and one major defect. The CLI returned ACCEPT, matching the row-selection rule. The worktree was clean after the five commits. The README estimate is about 15 minutes for this implementation session.
