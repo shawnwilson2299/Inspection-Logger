@@ -76,3 +76,10 @@ The review found that the handoff note's commit-count wording could mislead: its
 **Verification:** Added five real HTTP tests covering the major threshold, zero defects, repeated GET requests after redirects, invalid start and defect inputs, escaped user text, and preservation of records after a repeated start request. All 18 tests passed. These HTTP tests use an isolated temporary port and do not change the user's running inspection. Updated the README and the untested-risks section of DECISIONS.md. Added an ignore rule for the backup bundles to prevent accidental staging.
 
 **Requirement exception:** The user explicitly requested removal of the README time estimate after being told that the brief asks for one; that preference was preserved. Earlier chronological entries describe the estimates that existed at those points.
+
+
+## 3 November 2026 — restore required time estimate
+
+**User request (exact):** “add the rough time estimate i accidentally didnt see it as a requiremtn”
+
+**Change:** Restored a Time spent section in README.md. The estimate describes approximately six hours elapsed across sessions, based on the project history and review timeline. It explicitly includes breaks and setup troubleshooting and does not claim a measured active-work duration. This supersedes the earlier request to omit the estimate.

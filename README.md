@@ -39,6 +39,10 @@ python -m unittest discover -s tests -v
 
 The 18 tests cover the verdict rules, sample-size boundaries, and HTTP form handling, including redirects, repeated page loads, input validation, HTML escaping, and protection against replacing an active inspection. The browser flow was also checked manually, including the verdict change from ACCEPT to REJECT and refresh behavior.
 
+## Time spent
+
+Approximately 6 hours elapsed across several sessions, including implementation, learning and reviewing the code, manual testing, documentation, and GitHub setup. This includes breaks and setup troubleshooting; active working time was not tracked separately.
+
 ## AI session
 
 The Codex session record is in [`session-log.md`](session-log.md).
