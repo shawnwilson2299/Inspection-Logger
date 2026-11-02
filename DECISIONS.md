@@ -14,6 +14,6 @@ The brief allows memory or JSON storage but does not specify whether one program
 
 ## Three things the tests do not cover
 
-1. The CLI prompt sequence and browser HTTP form/redirect flow are not automated end to end. The user manually checked the browser verdict boundaries and confirmed that refresh does not duplicate a submitted defect; see `session-log.md`.
+1. The automated HTTP tests do not drive a real browser or check browser-specific form validation and keyboard accessibility. The browser flow was checked manually; see `session-log.md`.
 2. Entries disappear on exit by design, so there is no recovery after the program closes unexpectedly.
 3. There is no practical upper bound for a positive sample size; very large values use the highest table row, as specified by the row-selection rule, but that behavior is only tested at 900.

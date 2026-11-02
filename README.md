@@ -37,7 +37,7 @@ From the repository directory, with the virtual environment active:
 python -m unittest discover -s tests -v
 ```
 
-The tests cover the verdict rules and sample-size boundaries. The browser flow was also checked manually, including the verdict change from ACCEPT to REJECT and refresh behavior.
+The 18 tests cover the verdict rules, sample-size boundaries, and HTTP form handling, including redirects, repeated page loads, input validation, HTML escaping, and protection against replacing an active inspection. The browser flow was also checked manually, including the verdict change from ACCEPT to REJECT and refresh behavior.
 
 ## AI session
 

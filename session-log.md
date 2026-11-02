@@ -65,3 +65,14 @@ The review found that the handoff note's commit-count wording could mislead: its
 **Documentation updates:** README.md now explains both the CLI and browser versions, gives the setup, run, and test commands, and has no “Time spent” section. DECISIONS.md and this log describe the browser interface, its shared verdict rules and in-memory behavior, the 303 redirect after successful submissions, and the checks performed.
 
 **Checks:** The user's manual browser checks are recorded above. `python3 -m unittest discover -s tests -v` passed all 13 existing tests before commit; `git diff --check` passed. The `.bundle` backups remain untracked and are excluded from staging.
+
+
+## 3 November 2026 — submission audit
+
+**User request (exact):** “apart from read me, is everything else in place and shared on github, make sure no stones are left unturned and there are no silly mistakes, when i wake up.i just want to review everything and not change anything so make sure all is done”
+
+**Finding and fix:** The assistant found that sending the start form again could replace the active inspection and discard its defects. The `/start` handler now refuses replacement with HTTP 409 and preserves the existing inspection. This protects the one-inspection-per-run assumption without introducing a reset or history feature.
+
+**Verification:** Added five real HTTP tests covering the major threshold, zero defects, repeated GET requests after redirects, invalid start and defect inputs, escaped user text, and preservation of records after a repeated start request. All 18 tests passed. These HTTP tests use an isolated temporary port and do not change the user's running inspection. Updated the README and the untested-risks section of DECISIONS.md. Added an ignore rule for the backup bundles to prevent accidental staging.
+
+**Requirement exception:** The user explicitly requested removal of the README time estimate after being told that the brief asks for one; that preference was preserved. Earlier chronological entries describe the estimates that existed at those points.

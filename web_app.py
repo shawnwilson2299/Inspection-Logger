@@ -119,6 +119,9 @@ class InspectionHandler(BaseHTTPRequestHandler):
             return form.get(name, [""])[0].strip()
 
         if self.path == "/start":
+            if current_inspection is not None:
+                self.send_page(render_page("An inspection is already active. Its recorded defects have been preserved."), status=409)
+                return
             batch_id = value("batch_id")
             raw_sample_size = value("sample_size")
             try:
