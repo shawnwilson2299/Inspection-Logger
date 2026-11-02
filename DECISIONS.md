@@ -2,7 +2,7 @@
 
 ## Where the AI got it wrong
 
-No specific AI error was found during this session. The verdict implementation was checked against the six examples in the brief and additional table-boundary tests; all passed. I have not invented a mistake or an exchange. The session record is in `session-log.md`.
+The AI made a bookkeeping mistake in its handoff note. In `session-log.md`, under “GitHub publication status,” the original sentence was: “The local `main` branch has six meaningful commits and a clean worktree.” During final review, comparing that statement with `git log --oneline` showed seven commits: the note was written before, and then included in, an additional commit. I corrected the session log to explain the timing and the final count. The verdict rules were separately checked against the brief examples and boundary tests.
 
 ## What I chose not to build, and why
 

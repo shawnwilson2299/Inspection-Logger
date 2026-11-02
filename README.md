@@ -36,7 +36,7 @@ python -m unittest discover -s tests -v
 
 ## Time spent
 
-About 15 minutes, including implementation, the automated tests, and submission notes.
+About 25 minutes so far, including implementation, the automated tests, submission notes, and final review.
 
 ## AI session
 
