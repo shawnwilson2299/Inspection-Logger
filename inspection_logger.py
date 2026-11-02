@@ -1,4 +1,6 @@
-"""Verdict rules for the Inspection Defect Logger."""
+"""Interactive CLI and verdict rules for the Inspection Defect Logger."""
+
+from dataclasses import dataclass, field
 
 # Each row is (minimum sample size, major limit, minor limit).
 ACCEPTANCE_LIMITS = (
@@ -45,9 +47,82 @@ def verdict_for(sample_size: int, defects: list[dict[str, str]]) -> str:
     return "ACCEPT"
 
 
-def main() -> None:
+@dataclass
+class Inspection:
+    """One inspection and the defects recorded during the current run."""
+
+    batch_id: str
+    sample_size: int
+    defects: list[dict[str, str]] = field(default_factory=list)
+
+    def record_defect(self, severity: str, description: str) -> None:
+        severity = severity.strip().lower()
+        description = description.strip()
+        if severity not in SEVERITIES:
+            raise ValueError("Severity must be critical, major, or minor.")
+        if not description:
+            raise ValueError("Description cannot be empty.")
+        self.defects.append({"severity": severity, "description": description})
+
+    def verdict(self) -> str:
+        return verdict_for(self.sample_size, self.defects)
+
+
+def ask_for_sample_size() -> int:
+    while True:
+        raw = input("Sample size (whole number, at least 1): ").strip()
+        try:
+            size = int(raw)
+            acceptance_limits(size)
+            return size
+        except ValueError as error:
+            print(f"Invalid sample size: {error}")
+
+
+def start_inspection() -> Inspection:
     print("Inspection Defect Logger")
-    print("The command-line interface is in progress.")
+    while True:
+        batch_id = input("Batch ID: ").strip()
+        if batch_id:
+            break
+        print("Batch ID cannot be empty.")
+    sample_size = ask_for_sample_size()
+    return Inspection(batch_id=batch_id, sample_size=sample_size)
+
+
+def show_defects(inspection: Inspection) -> None:
+    if not inspection.defects:
+        print("No defects recorded.")
+        return
+    print(f"Defects for batch {inspection.batch_id}:")
+    for number, defect in enumerate(inspection.defects, start=1):
+        print(f"{number}. {defect['severity'].capitalize()}: {defect['description']}")
+
+
+def main() -> None:
+    inspection = start_inspection()
+    print(f"Inspection started for batch {inspection.batch_id} (sample size {inspection.sample_size}).")
+    print("Commands: record, list, verdict, quit")
+
+    while True:
+        command = input("\n> ").strip().lower()
+        if command == "record":
+            severity = input("Severity (critical / major / minor): ").strip().lower()
+            description = input("Short description: ").strip()
+            try:
+                inspection.record_defect(severity, description)
+                print("Defect recorded.")
+            except ValueError as error:
+                print(f"Invalid defect: {error}")
+        elif command == "list":
+            show_defects(inspection)
+        elif command == "verdict":
+            print(f"Verdict for batch {inspection.batch_id}: {inspection.verdict()}")
+        elif command in {"quit", "exit"}:
+            print("Inspection ended. Recorded data was only held in memory for this run.")
+            break
+        else:
+            print("Unknown command. Choose record, list, verdict, or quit.")
 
 
 if __name__ == "__main__":
