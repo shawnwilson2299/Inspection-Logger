@@ -23,3 +23,5 @@ This is a chronological record of the AI-assisted work for the Inspection Defect
 **Commit 5 — `f8fd142 Document setup decisions and AI session`:** Added README setup/run/test instructions, DECISIONS.md, and this session record after the tests passed.
 
 **Clean-clone verification:** Cloned the local repository into a temporary directory, followed the README environment setup commands, ran the complete test suite (13 passed), and exercised the CLI with a 44-unit sample and one major defect. The CLI returned ACCEPT, matching the row-selection rule. The worktree was clean after the five commits. The README estimate is about 15 minutes for this implementation session.
+
+**GitHub publication status:** The local `main` branch has six meaningful commits and a clean worktree. There is no GitHub remote or GitHub CLI configured. The browser reached GitHub's sign-in page, so repository creation and push are waiting for the user to sign in; no credentials were entered. A complete Git bundle preserving the code and history was created at `outputs/inspection-defect-logger.bundle` and verified with `git bundle verify` as a fallback handoff.
