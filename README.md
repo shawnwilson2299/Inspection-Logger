@@ -6,9 +6,11 @@ Inspection Defect Logger is a small Python notebook and calculator for factory i
 
 Python 3.9 or newer. The project uses only the Python standard library; there are no packages to install.
 
-From the repository directory, create and activate a virtual environment:
+With Git and Python installed, run these commands in a macOS/Linux shell (the `venv` module must be available):
 
 ```sh
+git clone https://github.com/shawnwilson2299/Inspection-Logger.git
+cd Inspection-Logger
 python3 -m venv .venv
 source .venv/bin/activate
 ```
@@ -45,4 +47,4 @@ Approximately 6 hours elapsed across several sessions, including implementation,
 
 ## AI session
 
-The Codex session record is in [`session-log.md`](session-log.md).
+The chronological Codex session summary is in [`session-log.md`](session-log.md). Genuine exported messages for the bug-review exchange are in [`transcript-excerpts.md`](transcript-excerpts.md); this is a labeled excerpt, not a full transcript.

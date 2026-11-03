@@ -2,7 +2,9 @@
 
 ## Where the AI got it wrong
 
-The AI made a bookkeeping mistake in its handoff note. In `session-log.md`, under “GitHub publication status,” the original sentence was: “The local `main` branch has six meaningful commits and a clean worktree.” During final review, comparing that statement with `git log --oneline` showed seven commits: the note was written before, and then included in, an additional commit. I corrected the session log to explain the timing and the final count. The verdict rules were separately checked against the brief examples and boundary tests.
+The AI-generated browser handler in commit `e1a58ea` accepted another `/start` request even when an inspection was active. Submitting the old start form again could overwrite the inspection and lose its defects. This conflicted with preserving recorded defects. I requested a final audit; the AI found the bug during that review, rather than me independently discovering it.
+
+The actual assistant response was: “I found one actual browser issue: resubmitting the old “Start inspection” form could replace the current inspection and lose its defects.” For the original punctuation and complete exchange, see [transcript-excerpts.md, record 1319](transcript-excerpts.md#record-1319--assistant--2026-11-02t185057379z), preceded by my audit request at record 1287. Commit `ae01687` added a guard that returns HTTP 409 and preserves the inspection, plus `test_repeat_start_does_not_erase_existing_inspection`. The final audit reran that regression test successfully. The earlier incorrect commit-count note remains documented in `session-log.md`; no verdict-rule error is being claimed.
 
 ## What I chose not to build, and why
 
