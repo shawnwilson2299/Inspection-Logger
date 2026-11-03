@@ -48,3 +48,5 @@ Approximately 6 hours elapsed across several sessions, including implementation,
 ## AI session
 
 The chronological Codex session summary is in [`session-log.md`](session-log.md). Genuine exported messages for the bug-review exchange are in [`transcript-excerpts.md`](transcript-excerpts.md); this is a labeled excerpt, not a full transcript.
+
+The original available text record for the development chat is exported in [`codex-transcript.md`](codex-transcript.md), through the transcript-export request on 3 November 2026. It preserves stored prompts, responses, and tool interactions chronologically, with source record references and labeled redactions. Its scope and omissions are stated at the top: it is not a complete raw archive of every related chat or image attachment.
